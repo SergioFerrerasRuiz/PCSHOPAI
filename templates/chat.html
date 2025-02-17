@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💻PCSHOP💻</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body class="bg-gray-950 text-white flex flex-col h-screen items-center p-4">
+    <div class="w-full max-w-2xl bg-gray-900 shadow-lg rounded-lg overflow-hidden flex flex-col h-full">
+        <div class="bg-gray-700 text-white p-4 text-center text-lg font-bold tracking-wide shadow-md">💻PCSHOP💻</div>
+        <div class="p-4 flex-1 overflow-y-auto space-y-4 bg-gray-800" id="chat-box">
+            <div id="chat-response"></div>
+        </div>
+        <div class="border-t border-gray-700 p-3 flex bg-gray-800 w-full items-center justify-between">
+            <form id="chat-form" class="flex items-center space-x-2 w-full relative">
+                <textarea id="chat-input" name="user_question" 
+          placeholder="Escribe tu pregunta..." 
+          rows="1"
+          autocomplete="off"
+          class="flex-grow p-3 rounded-xl bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-gray-500 text-sm font-medium placeholder-gray-400 shadow-md resize-none overflow-y-hidden"></textarea>
+
+                <button type="submit" id="send-button" class="bg-gray-700 text-white px-4 py-2 rounded-xl text-sm font-semibold hover:opacity-90 transition-all shadow-lg">➤</button>
+                <!-- Cambiar el tipo de archivo a PDF y TXT -->
+                <input type="file" id="file-upload" accept=".pdf,.txt" class="hidden">
+                <button id="upload-file-btn" class="bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-semibold hover:opacity-90 transition-all shadow-lg ml-2">📄</button>
+                <div id="loading-circle" class="hidden absolute right-24 w-6 h-6 border-4 border-sky-300 border-t-transparent rounded-full animate-spin"></div>
+            </form>
+            <button id="clear-chat" class="ml-2 bg-red-600 text-white px-4 py-2 rounded-xl text-sm font-semibold hover:opacity-90 transition-all shadow-lg">🗑️</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
