@@ -1,0 +1,14 @@
+{
+    "modelo": "LG gram 16Z90R",
+    "procesador": "Intel Core 13ª Generación",
+    "frecuencia_cpu_ghz": null,
+    "ram_gb": 32,
+    "tipo_ram": null,
+    "almacenamiento_gb": 1000,
+    "tipo_almacenamiento": "SSD",
+    "gpu": "RTX 3050",
+    "pantalla_pulgadas": null,
+    "resolucion": "WUXGA",
+    "peso_kg": 1.2,
+    "precio": 2130.0
+}

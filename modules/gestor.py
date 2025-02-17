@@ -6,7 +6,7 @@ from modules.jsoner import guardar_json
 from modules.formalizador import formalizacion
 from modules.recuperarpdf import recuperar_pdf
 
-def leer_json(ruta):
+def leer_jsonnn(ruta):
     try:
         with open(ruta, 'r', encoding='utf-8') as archivo:
             datos = json.load(archivo)
@@ -21,17 +21,16 @@ def leer_json(ruta):
         print(f"Error inesperado: {e}")
 
 def gestionar_info(texto):
-    intencion, idioma = leer_json("./data/json/info.json")
+    intencion, idioma = leer_jsonnn("./data/json/info.json")
     
     if intencion == "consultar_productos":
         result=procesar_con_groq(texto)
         guardar_json(result, 'data/json/componentesrequest.json')
         buscar_datos()
-        recuperar_pdf
         return formalizacion(idioma) #de momento devuelvo el resultado de procesar_con_groq
 
     elif intencion == "error":
-        intencion, idioma = leer_json("./data/json/info.json")
+        intencion, idioma = leer_jsonnn("./data/json/info.json")
         return respuesta_asistente(texto,idioma)
 
 

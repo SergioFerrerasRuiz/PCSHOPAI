@@ -1,0 +1,16 @@
+{
+    "_id": "67af131e94c42b2e83d363f8",
+    "modelo": "LG gram 16Z90R",
+    "procesador": "Intel Core i7",
+    "frecuencia_cpu_ghz": 2.2,
+    "ram_gb": 32,
+    "tipo_ram": "LPDDR5",
+    "almacenamiento_gb": 1000,
+    "tipo_almacenamiento": "SSD",
+    "gpu": "Iris Xe Graphics",
+    "pantalla_pulgadas": 16,
+    "resolucion": "2560 x 1600",
+    "peso_kg": 1.2,
+    "precio": 2130.0,
+    "pdf": "16Z90R-E.AD78B.pdf"
+}

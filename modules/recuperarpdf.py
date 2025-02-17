@@ -1,5 +1,5 @@
 import json
-from modules.blobstorage import descargar_archivos
+from modules.blobstorage import obtener_url_archivo
 
 
 def leer_json(ruta):
@@ -28,8 +28,8 @@ def obtener_pdf_desde_json(ruta_json):
     return None
 
 def recuperar_pdf():
-    intnecion,idioma = leer_json("../data/json/info.json")
-    pdf=obtener_pdf_desde_json("../data/json/componentesresult.json")   
+    idioma = leer_json("./data/json/info.json")
+    pdf=obtener_pdf_desde_json("./data/json/componentesresult.json")   
     contenedor=""
     try:
         if idioma == "ruso":
@@ -43,6 +43,6 @@ def recuperar_pdf():
         else:
             contenedor="containerseryi"
 
-        descargar_archivos(pdf, contenedor)
+        return obtener_url_archivo(pdf, contenedor)
     except Exception as e:
-        print(f"⚠️ Error al recuperar el archivo PDF: {e}")
+        return None

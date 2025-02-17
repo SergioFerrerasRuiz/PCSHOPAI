@@ -26,6 +26,13 @@ $(document).ready(function() {
                     $("#chat-box").append(
                         "<div class='message bot-message'><div class='markdown'><strong>SERYI:</strong><br>" + response.answer + "</div></div>"
                     );
+                    
+                    // Agregar el enlace debajo de la respuesta
+                    if (response.link) {
+                        $("#chat-box").append(
+                            "<div class='message bot-message'><a href='" + response.link + "' target='_blank' class='text-blue-400 underline'>Ver más información</a></div>"
+                        );
+                    }
                 } else {
                     $("#chat-box").append("<div class='message bot-message text-red-500'>Error en la respuesta</div>");
                 }
@@ -84,17 +91,25 @@ $(document).ready(function() {
             contentType: false,
             success: function(response) {
                 $("#loading-circle").addClass("hidden");
-
+        
                 if (response.error) {
                     $("#chat-box").append(
                         "<div class='message bot-message text-red-500'><strong>Error:</strong> " + response.error + "</div>"
                     );
                     return;
                 }
-
+        
+                // Mostrar el mensaje principal
                 $("#chat-box").append(
                     "<div class='message bot-message'><div class='markdown'><strong>Seryi:</strong> " + (response.summary || response.message) + "</div></div>"
                 );
+        
+                // Mostrar el mensaje de "esperando implementación"
+                if (response.additional_message) {
+                    $("#chat-box").append(
+                        "<div class='message bot-message text-gray-500'><strong>Documento:</strong> <a href='" + response.additional_message + "' target='_blank' style='color: blue; text-decoration: none;'>" + response.additional_message + "</a></div>"
+                    );
+                }                
             },
             error: function(xhr) {
                 $("#loading-circle").addClass("hidden");
@@ -104,6 +119,6 @@ $(document).ready(function() {
             complete: function() {
                 $("#file-upload").val("");
             }
-        });
+        });        
     }
 });

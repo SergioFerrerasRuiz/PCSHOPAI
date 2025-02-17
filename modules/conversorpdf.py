@@ -4,7 +4,7 @@ import os
 from azure.ai.documentintelligence import DocumentIntelligenceClient
 from azure.core.credentials import AzureKeyCredential
 from dotenv import load_dotenv
-
+import base64
 # Cargar variables de entorno
 load_dotenv()
 
@@ -15,15 +15,22 @@ KEY = os.getenv("AZURE_KEY")
 # Inicializar el cliente de Azure AI
 client = DocumentIntelligenceClient(endpoint=ENDPOINT, credential=AzureKeyCredential(KEY))
 
+
 def extraer_texto(pdf_path):
     """Extrae el texto de un PDF utilizando la API de Azure AI."""
     with open(pdf_path, "rb") as pdf_file:
-        poller = client.begin_analyze_document("prebuilt-read", body=pdf_file)
-        result = poller.result()
+        # Leer el archivo y codificarlo en Base64
+        pdf_base64 = base64.b64encode(pdf_file.read()).decode("utf-8")
+
+    # Usar el archivo Base64 con la API de Azure
+    poller = client.begin_analyze_document("prebuilt-read", {"base64Source": pdf_base64})
+    result = poller.result()
 
     # Obtener el texto del documento usando 'line.content'
     texto_extraido = "\n".join([line.content for page in result.pages for line in page.lines])
     return texto_extraido
+
+
 
 def procesar_pdf(pdf_path):
     """Método para procesar el PDF y manejar excepciones."""
