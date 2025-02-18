@@ -28,21 +28,31 @@ def obtener_pdf_desde_json(ruta_json):
     return None
 
 def recuperar_pdf():
-    idioma = leer_json("./data/json/info.json")
-    pdf=obtener_pdf_desde_json("./data/json/componentesresult.json")   
-    contenedor=""
     try:
-        if idioma == "ruso":
-            contenedor="targettranslateru"
-        elif idioma == "inglés":
-            contenedor="targettranslateen"
-        elif idioma == "francés":
-            contenedor="targettranslatefr"
-        elif idioma == "chino":
-            contenedor="targettranslatelzh"
-        else:
-            contenedor="containerseryi"
+        lenguaje,idioma = leer_json("./data/json/info.json") or ""  # Evita None
+        if isinstance(idioma, tuple):  # Si es una tupla, tomamos el primer elemento
+            idioma = idioma[0]
 
+        if not isinstance(idioma, str):  # Si sigue sin ser string, lo convertimos
+            idioma = str(idioma)
+
+        idiomaform = idioma.strip().lower()
+
+        contenedores = {
+            "ruso": "targettranslateru",
+            "inglés": "targettranslateen",
+            "francés": "targettranslatefr",
+            "chino": "targettranslatelzh"
+        }
+
+        contenedor = contenedores.get(idiomaform, "containerseryi")
+
+        print(f"Contenedor seleccionado: {contenedor}")
+        print(f"Idioma detectado: {repr(idioma)}")
+
+        pdf = obtener_pdf_desde_json("./data/json/componentesresult.json")
         return obtener_url_archivo(pdf, contenedor)
+
     except Exception as e:
+        print(f"Error en recuperar_pdf: {e}")
         return None
